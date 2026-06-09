@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gold-brand text-white font-semibold px-6 py-3 rounded hover:bg-gold-dark transition-colors duration-200;
+  }
+  .btn-secondary {
+    @apply bg-white text-teal-brand font-semibold px-6 py-3 rounded border-2 border-white hover:bg-gray-100 transition-colors duration-200;
+  }
+  .section-heading {
+    @apply text-3xl font-bold text-teal-brand mb-4;
+  }
+  .section-subheading {
+    @apply text-lg text-gray-600 mb-8;
+  }
+}
