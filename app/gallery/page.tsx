@@ -45,6 +45,9 @@ export default function GalleryPage() {
             range of commercial and multifamily properties. From luxury condominiums to affordable housing
             developments, our products deliver consistent quality in every environment.
           </p>
+          <p className="text-sm text-[#C9A84C] mt-4 font-medium">
+            Gallery photos coming soon — contact us for project references and photos.
+          </p>
         </div>
       </section>
 

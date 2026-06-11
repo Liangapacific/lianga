@@ -1,44 +1,58 @@
 'use client';
 
 import { useState } from 'react';
-import type { Metadata } from 'next';
+import Link from 'next/link';
 
 const faqs = [
   {
-    q: 'What types of moulding does Lianga Pacific manufacture?',
-    a: 'Lianga Pacific manufactures three main categories of moulding: Prefinished, Painted, and Primed. Each type serves a different finishing need. Prefinished moulding arrives ready to install with a factory-applied finish. Painted moulding has a smooth painted surface. Primed moulding is prepared with a primer base coat and ready for your custom topcoat color.',
+    q: 'What is FIBERTEX?',
+    a: 'FIBERTEX is a proprietary textured surface MDF used in the manufacturing of our Prefinished door jambs.',
+  },
+  {
+    q: 'Is your MDF Formaldehyde free?',
+    a: 'Our MDF meets the CARB 2 standard and we can quote NAUF (No Added Urea Formaldehyde) if your project requires it.',
+  },
+  {
+    q: 'What kind of coatings do you use?',
+    a: null,
+    detail: [
+      {
+        label: 'Primed Mouldings and Millwork',
+        text: 'Our primers are acrylic latex based coatings.',
+      },
+      {
+        label: 'Prefinished and Painted Mouldings and Millwork',
+        text: 'We offer a triple coat finishing system consisting of two coats of pigmented, fast drying, Modified Nitrocellulose lacquer and a final topcoat of clear Nitrocellulose Alkyd.',
+      },
+    ],
+  },
+  {
+    q: 'What about custom colors?',
+    a: 'Our systematic ColorMatch™ process assures the color you select is delivered ready to install. Provide us a color sample to match, and we will match your color and send samples for your approval.',
+  },
+  {
+    q: 'What are the substrate options?',
+    a: 'Our mouldings are made of finger joint wood and MDF (medium density fiberboard).',
+  },
+  {
+    q: 'How durable are they?',
+    a: 'Our prefinished and painted mouldings and millwork have been installed in commercial Multi-family projects for close to 60 years. Our triple coat finishing system has stood the test of time and is continually specified for the tough conditions of the Multi-family rental market.',
+  },
+  {
+    q: 'Do you offer the ExpressBid™ System?',
+    a: 'Yes. Our ExpressBid™ System is designed to help contractors and developers get accurate pricing quickly so you can keep your project timeline on track. Contact our sales team to learn more.',
   },
   {
     q: 'What profile styles are available?',
-    a: 'We offer a wide range of profiles including base moulding, door casing, crown moulding, chair rail, panel moulding, door stop, shoe moulding, and more. Custom profiles can also be produced for projects requiring a specific design. Contact our sales team to discuss your profile requirements.',
+    a: 'We offer a wide range of profiles selected from our LP pattern series, including base moulding, door casing, door jambs, door stop, base shoe, and S4S boards — in both Classic and Contemporary styles. Custom profiles can also be indicated on project drawings.',
   },
   {
-    q: 'Do you offer custom colors for prefinished and painted moulding?',
-    a: 'Yes. While we stock standard colors for immediate availability, we can also match custom colors for larger orders. Custom color matching is available for both prefinished and painted moulding. Please contact our sales team with your color specifications and project details so we can provide a quote and lead time.',
-  },
-  {
-    q: 'What are the standard lengths available for moulding products?',
-    a: 'Our standard moulding lengths are 8 feet and 12 feet. Custom lengths may be available depending on the product and order volume. For large commercial or multifamily projects, we can often accommodate specific length requirements. Please inquire with our sales team.',
-  },
-  {
-    q: 'What is the typical lead time for an order?',
-    a: 'Lead times vary depending on the product type, quantity, and customization requirements. Stock items are generally available for prompt shipment. Custom colors or profiles may require 2–4 weeks or longer. For time-sensitive projects, please contact us as early as possible so we can plan accordingly.',
-  },
-  {
-    q: 'Do you ship outside of Washington State?',
-    a: 'Yes. While we are based in Tacoma, Washington, we ship products throughout the Pacific Northwest and to customers across the United States. Shipping options and costs will depend on order size and destination. Contact us for a freight quote.',
-  },
-  {
-    q: 'Can I request a sample before placing a large order?',
-    a: 'Absolutely. We encourage customers to request color chip samples and physical profile samples before placing a full order. This ensures the product meets your expectations before committing to quantity. Use our Contact page or email sales@lianga.com to request samples.',
-  },
-  {
-    q: 'What species of wood are your mouldings made from?',
-    a: 'Our mouldings are available in several species and substrate options including finger-joint pine, MDF (medium-density fiberboard), and hardwood species depending on the product line. The right choice depends on your application — MDF is great for painted applications, while wood species are preferred for stain or prefinished applications.',
+    q: 'Where are you located and do you ship nationwide?',
+    a: 'Our mill is located at 2120 Port of Tacoma Road, Tacoma, Washington 98421. We provide high-quality prefinished mouldings and millwork to contractors, developers, and distributors all over the United States.',
   },
 ];
 
-function FaqItem({ q, a }: { q: string; a: string }) {
+function FaqItem({ q, a, detail }: { q: string; a: string | null; detail?: { label: string; text: string }[] }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border border-gray-200 rounded-lg overflow-hidden">
@@ -57,8 +71,18 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         </svg>
       </button>
       {open && (
-        <div className="px-6 pb-5 bg-white border-t border-gray-100">
-          <p className="text-gray-600 text-sm leading-relaxed pt-4">{a}</p>
+        <div className="px-6 pb-5 bg-white border-t border-gray-100 pt-4">
+          {a && <p className="text-gray-600 text-sm leading-relaxed">{a}</p>}
+          {detail && (
+            <div className="space-y-3">
+              {detail.map((d) => (
+                <div key={d.label}>
+                  <p className="font-semibold text-[#1B5E78] text-sm mb-1">{d.label}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{d.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -72,16 +96,20 @@ export default function FaqsPage() {
       <section className="bg-[#1B5E78] text-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-extrabold mb-2">Frequently Asked Questions</h1>
-          <p className="text-blue-200">Answers to common questions about our products and services</p>
+          <p className="text-blue-200">Lianga Pacific — answers to our most common questions</p>
         </div>
       </section>
 
       {/* FAQ List */}
       <section className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
+          <p className="text-gray-600 mb-8 leading-relaxed">
+            Here are some of the most common questions we receive. If you can&apos;t find the answer to your
+            question, please give us a call to discuss your project.
+          </p>
           <div className="space-y-3">
             {faqs.map((faq, i) => (
-              <FaqItem key={i} q={faq.q} a={faq.a} />
+              <FaqItem key={i} q={faq.q} a={faq.a ?? null} detail={faq.detail} />
             ))}
           </div>
         </div>
@@ -92,14 +120,14 @@ export default function FaqsPage() {
         <div className="max-w-xl mx-auto">
           <h2 className="text-2xl font-bold text-[#1B5E78] mb-3">Still Have Questions?</h2>
           <p className="text-gray-600 mb-6">
-            Our knowledgeable team is happy to answer any questions not covered here. Reach out by phone or email.
+            Our knowledgeable team is happy to answer any questions not covered here. Reach out by phone or email and we&apos;ll get back to you promptly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:253-383-4761" className="inline-block bg-[#1B5E78] text-white font-semibold px-8 py-3 rounded hover:bg-[#134558] transition-colors">
+            <a href="tel:2533834761" className="inline-block bg-[#1B5E78] text-white font-semibold px-8 py-3 rounded hover:bg-[#134558] transition-colors">
               Call 253-383-4761
             </a>
             <a href="mailto:sales@lianga.com" className="inline-block bg-white border-2 border-[#1B5E78] text-[#1B5E78] font-semibold px-8 py-3 rounded hover:bg-gray-100 transition-colors">
-              Email Us
+              Email sales@lianga.com
             </a>
           </div>
         </div>
